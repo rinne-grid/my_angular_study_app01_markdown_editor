@@ -1,0 +1,22 @@
+.side-and-content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.side {
+  width: 20%;
+}
+
+.content {
+  display: flex;
+}
+
+.markdown-editor-area {
+  width: 50%;
+}
+
+.markdown-preview-area {
+  display: flex;
+  width: 50%;
+}

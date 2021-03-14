@@ -1,0 +1,6 @@
+<div class="markdown-title-field">
+  <input type="text" id="markdown-title" [(ngModel)]="currentItem.title">
+</div>
+<div class="markdown-body-field">
+  <textarea #editor id="markdown-editor" [(ngModel)]="currentItem.body" (input)="changeMarkdownEditor(currentItem)"></textarea>
+</div>

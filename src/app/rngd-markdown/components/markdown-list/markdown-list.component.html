@@ -1,0 +1,5 @@
+<mat-selection-list role="list" [multiple]="false">
+  <mat-list-option *ngFor="let item of itemList">
+    <app-markdown-list-card [markdownItem]="item" (mouseup)="clickCardItem(item)"></app-markdown-list-card>
+  </mat-list-option>
+</mat-selection-list>

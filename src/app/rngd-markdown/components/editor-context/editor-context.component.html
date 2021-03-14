@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span><b>RngdMarkdownEditor</b></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="side-and-content">
+    <!-- EditorAction -->
+    <mat-drawer-container>
+
+      <mat-drawer mode="side" opened class="side">
+        <div class="action">
+          <app-editor-action></app-editor-action>
+        </div>
+        <div class="list-data">
+          <app-markdown-list [itemList]="itemList"></app-markdown-list>
+        </div>
+      </mat-drawer>
+
+      <mat-drawer-content class="content">
+        <!-- MarkdownEdit -->
+        <div class="markdown-editor-area">
+          <app-markdown-edit [currentItem]="selectedItem"></app-markdown-edit>
+        </div>
+
+        <!-- MarkdownPreview -->
+        <div class="markdown-preview-area">
+          <app-markdown-preview [currentItem]="selectedItem"></app-markdown-preview>
+        </div>
+
+      </mat-drawer-content>
+    </mat-drawer-container>
+</div>
