@@ -12,7 +12,8 @@
           <app-editor-action></app-editor-action>
         </div>
         <div class="list-data">
-          <app-markdown-list [itemList]="itemList"></app-markdown-list>
+<!--          <app-markdown-list [itemList]="itemList"></app-markdown-list>-->
+          <app-markdown-list [itemList]="itemListRx | async"></app-markdown-list>
         </div>
       </mat-drawer>
 
@@ -20,11 +21,13 @@
         <!-- MarkdownEdit -->
         <div class="markdown-editor-area">
           <app-markdown-edit [currentItem]="selectedItem"></app-markdown-edit>
+<!--          <app-markdown-edit [currentItem]="selectedItemRx | async"></app-markdown-edit>-->
         </div>
 
         <!-- MarkdownPreview -->
         <div class="markdown-preview-area">
           <app-markdown-preview [currentItem]="selectedItem"></app-markdown-preview>
+<!--          <app-markdown-preview [currentItem]="selectedItemRx | async"></app-markdown-preview>-->
         </div>
 
       </mat-drawer-content>

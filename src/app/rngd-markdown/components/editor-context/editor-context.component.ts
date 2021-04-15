@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MarkdownItem} from '../../models/MarkdownItem';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {MarkdownStoreService} from '../../services/markdown-store.service';
 
 @Component({
@@ -10,6 +10,10 @@ import {MarkdownStoreService} from '../../services/markdown-store.service';
 })
 export class EditorContextComponent implements OnInit, OnDestroy {
   itemList: MarkdownItem[] = [];
+  itemListRx: Observable<MarkdownItem[]> = this.markdownStoreService.markdownList$;
+
+  selectedItemRx: Observable<MarkdownItem> = this.markdownStoreService.markdownSelected$;
+
   selectedItem: MarkdownItem;
   // 現在選択中のマークダウンデータ購読用
   private subscription!: Subscription;

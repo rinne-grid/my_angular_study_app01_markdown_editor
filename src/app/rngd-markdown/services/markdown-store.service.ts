@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IMarkdownStoreService } from '../interfaces/IMarkdownStoreService';
 import {MarkdownItem} from '../models/MarkdownItem';
-import {Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -51,6 +51,18 @@ export class MarkdownStoreService implements IMarkdownStoreService {
    */
   public markdownListSharedDataSource$ = this.markdownListSharedDataSource.asObservable();
 
+  private _markdownList$ = new BehaviorSubject<MarkdownItem[]>([]);
+
+  private _markdownSelected$ = new BehaviorSubject<MarkdownItem>(MarkdownItem.factory('最初のMarkdownノート', ''));
+
+  get markdownList$(): Observable<MarkdownItem[]> {
+    return this._markdownList$.asObservable();
+  }
+
+  get markdownSelected$(): Observable<MarkdownItem> {
+    return this._markdownSelected$.asObservable();
+  }
+
   constructor() { }
 
   /***
@@ -68,7 +80,7 @@ export class MarkdownStoreService implements IMarkdownStoreService {
    */
   public onNotifyMarkdownListSharedDataSourceChanged(updated: MarkdownItem[]): void {
     this.markdownListSharedDataSource.next(updated);
-    this.storeMarkdownListSharedData = updated;
+    // this.storeMarkdownListSharedData = updated;
   }
 
   /***
@@ -76,8 +88,11 @@ export class MarkdownStoreService implements IMarkdownStoreService {
    * @param markdownItem
    */
   add(markdownItem: MarkdownItem): void {
-    this.storeMarkdownListSharedData.push(markdownItem);
-    this.onNotifyMarkdownListSharedDataSourceChanged(this.storeMarkdownListSharedData);
+    // this.storeMarkdownListSharedData.push(markdownItem);
+    const currentMarkdownList: MarkdownItem[] = this._markdownList$.getValue();
+    currentMarkdownList.push(markdownItem);
+    // this.onNotifyMarkdownListSharedDataSourceChanged(this.storeMarkdownListSharedData);
+    this._markdownList$.next(currentMarkdownList);
   }
 
   save(markdownItem: MarkdownItem): Observable<boolean> {
@@ -109,6 +124,7 @@ export class MarkdownStoreService implements IMarkdownStoreService {
     }
     this.storeMarkdownListSharedData = markdownItemList;
     const observableList = of(markdownItemList);
+    this._markdownList$.next(markdownItemList);
     return observableList;
   }
 }

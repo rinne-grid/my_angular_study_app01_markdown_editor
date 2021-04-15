@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MarkdownItem} from '../../models/MarkdownItem';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {MarkdownStoreService} from '../../services/markdown-store.service';
 
 @Component({
